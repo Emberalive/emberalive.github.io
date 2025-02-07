@@ -57,34 +57,76 @@ window.addEventListener('DOMContentLoaded', () => {
         });
 
         canvas.addEventListener('mousemove', function (e) {
-            if (circle.checked) {
-                if (fill.checked) {
-                    if (rancolour.checked) {
-                        ctx.fillStyle = randomColor();
+            // Reset default style
+            ctx.fillStyle = 'rgba(0, 0, 0, 0)';  // Default transparent fill
+            ctx.strokeStyle = 'black'; // Default black stroke
+            ctx.lineWidth = 1; // Default line width
+
+            // Apply styles if the checkboxes are checked
+            if (circle.checked || square.checked) {  // Check if either shape is selected
+                if (circle.checked) {
+                    // Handle fill style if fill is checked
+                    if (fill.checked) {
+                        if (rancolour.checked) {
+                            ctx.fillStyle = randomColor(); // Random fill color
+                        } else {
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // Transparent fill (when unchecked)
+                        }
                     }
-                    ctx.fill();
-                } else if (outline.checked){
-                    if (rancolour.checked) {
-                        ctx.strokeStyle = randomColor();
+
+                    // Handle outline style if outline is checked
+                    if (outline.checked) {
+                        if (rancolour.checked) {
+                            ctx.strokeStyle = randomColor(); // Random stroke color
+                        } else {
+                            ctx.strokeStyle = 'black'; // Default black stroke
+                        }
+                        ctx.lineWidth = randomWidth(); // Random line width
                     }
-                    ctx.lineWidth = randomWidth();
+
+                    // Draw the circle
+                    drawCircle(e.offsetX, e.offsetY);
+
+                    if (fill.checked) {
+                        ctx.fill(); // Apply fill after drawing the circle
                     }
-                drawCircle(e.offsetX, e.offsetY);
-            }
-            if (square.checked) {
-                if (fill.checked) {
-                    if (rancolour.checked) {
-                        ctx.fillStyle = randomColor();
+                    if (outline.checked) {
+                        ctx.stroke(); // Apply outline after drawing the circle
                     }
-                    ctx.fill();
-                } else if (outline.checked) {
-                    if (rancolour.checked) {
-                        ctx.strokeStyle = randomColor();
-                    }
-                    ctx.lineWidth = randomWidth();
                 }
-                drawSquare(e.offsetX, e.offsetY);
+
+                if (square.checked) {
+                    // Handle fill style if fill is checked
+                    if (fill.checked) {
+                        if (rancolour.checked) {
+                            ctx.fillStyle = randomColor(); // Random fill color
+                        } else {
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // Transparent fill (when unchecked)
+                        }
+                    }
+
+                    // Handle outline style if outline is checked
+                    if (outline.checked) {
+                        if (rancolour.checked) {
+                            ctx.strokeStyle = randomColor(); // Random stroke color
+                        } else {
+                            ctx.strokeStyle = 'black'; // Default black stroke
+                        }
+                        ctx.lineWidth = randomWidth(); // Random line width
+                    }
+
+                    // Draw the square
+                    drawSquare(e.offsetX, e.offsetY);
+
+                    if (fill.checked) {
+                        ctx.fill(); // Apply fill after drawing the square
+                    }
+                    if (outline.checked) {
+                        ctx.stroke(); // Apply outline after drawing the square
+                    }
+                }
             }
-        })
+        });
+
     });
 });
