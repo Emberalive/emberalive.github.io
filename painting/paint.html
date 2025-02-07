@@ -8,16 +8,31 @@
     </head>
     <body>
         <div class = "wrapper">
-            <h1>Silly Painting</h1>
-            <div class = "menu">
-                <a href="../index.html">Home</a>
-            </div>
-            <canvas width="200" height="150"></canvas>
             <div class = "main-card">
-                <button>Circle</button>
-                <button>Quadrilateral</button>
-                <button>Fill</button>
-                <button>Outline</button>
+                <h1>Silly Painting</h1>
+                <div class = "menu">
+                    <a href="../index.html">Home</a>
+                </div>
+
+                <canvas width="800" height="600"></canvas>
+            </div>
+            <div class = "sidebar">
+                <label> Circle
+                    <input type="checkbox" id="circle">
+                </label>
+                <label> Square
+                    <input type="checkbox" id="square">
+                </label>
+                <label> Fill
+                    <input type="checkbox" id="fill">
+                </label>
+                <label> Outline
+                    <input type="checkbox" id="outline">
+                </label>
+                <label> RandomColour
+                    <input type="checkbox" id="rancolour">
+                </label>
+                <button id="clear">Clear</button>
             </div>
 
             <script src = "../.idea/js.js"></script>

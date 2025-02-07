@@ -1,6 +1,19 @@
 window.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('load', function (e) {
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
+        const outline = document.getElementById('outline');
+        const fill = document.getElementById('fill');
+        const rancolour = document.getElementById('rancolour');
+
+        const clear = document.getElementById('clear');
+        clear.addEventListener('click', function (e) {
+            ctx.fillStyle = 'lightgray';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            console.log("canvas was cleared");
+        })
+
         function randomWidth() {
             return Math.floor(Math.random() * 20);
         }
@@ -11,42 +24,67 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function randomColor() {
             Math.random();
-
             Math.floor(Math.random() * 255);
 
             const r = Math.random() * 255;
             const g = Math.random() * 255;
             const b = Math.random() * 255;
 
-            const colour = "rgb(" + r + "," + g + "," + b + ")";
-
-            return colour;
+            return "rgb(" + r + "," + g + "," + b + ")";
         }
 
-        function draw(x, y) {
-            ctx.strokeStyle = randomColor();
-
-            ctx.lineWidth= randomWidth();
-
+        function drawCircle(x, y) {
             ctx.beginPath();
+            ctx.arc(x, y, randomHeight(), 0, Math.PI * 2, false);
+            ctx.stroke()
+        }
 
-            const a = Math.floor(Math.random() * 2)
-            if (a == 1){
-                ctx.rect(x, y, randomHeight(), randomHeight());
-
-            } else {
-                ctx.arc(x, y, 50, 0, randomWidth(),Math.PI * 2, false);
-            }
-
+        function drawSquare(x, y) {
+            ctx.beginPath();
+            ctx.rect(x, y, randomHeight(), randomHeight());
             ctx.stroke();
         }
 
-        const canvas = document.querySelector('canvas');
-        const ctx = canvas.getContext('2d');
+        const circle = document.getElementById('circle');
+        circle.addEventListener('click', function (e) {
+            console.log(circle.checked ? "Circle mode ON" : "Circle mode Off");
+        });
+
+        const square = document.getElementById('square');
+        square.addEventListener('click', function (e) {
+            drawSquares = true;
+            console.log(square.checked ? "Square mode ON" : "Square mode Off");
+        });
 
         canvas.addEventListener('mousemove', function (e) {
-            console.log(e.offsetX + ", " + e.offsetY);
-            draw(e.offsetX, e.offsetY);
+            if (circle.checked) {
+                if (fill.checked) {
+                    if (rancolour.checked) {
+                        ctx.fillStyle = randomColor();
+                    }
+                    ctx.fill();
+                } else if (outline.checked){
+                    if (rancolour.checked) {
+                        ctx.strokeStyle = randomColor();
+                    }
+                    ctx.lineWidth = randomWidth();
+                    }
+                drawCircle(e.offsetX, e.offsetY);
+            }
+            if (square.checked) {
+                if (fill.checked) {
+                    if (rancolour.checked) {
+                        ctx.fillStyle = randomColor();
+                    }
+                    ctx.fill();
+                } else if (outline.checked) {
+                    if (rancolour.checked) {
+                        ctx.strokeStyle = randomColor();
+                    }
+                    ctx.lineWidth = randomWidth();
+                }
+                drawSquare(e.offsetX, e.offsetY);
+            }
         })
     });
 });

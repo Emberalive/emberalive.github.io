@@ -4,17 +4,91 @@ body {
     font-size: 16px;
     text-align: center;
     background: #000;
+    margin: 0;
+    padding: 0;
 }
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+    margin-left: 20%;
+}
+
 canvas {
     background-color: lightgray;
+    margin: 4%;
 }
 .menu {
     position: relative;
 }
 
 .main-card {
-    display: grid;
-    grid-template-columns: 20% 1fr;
-    gap: 1rem;
+flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.sidebar {
+    width: 20%;
+    background: #333;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
+}
+
+.sidebar label {
+    display: flex;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    color: lightgrey;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.sidebar input[type="checkbox"] {
+    transform: scale(1.5); /* Increases the size by 1.5x */
+    display: block;
+    margin: 10px;
+}
+
+.sidebar button:hover {
+    background-color: darkgray;
+}
+
+.clicked {
+    background-color: gray;
+    color: aliceblue;
+}
+
+.main-card {
+    display: inline-block;
+    margin-left: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu a:hover {
+    background-color: darkgray;
+    color: aliceblue;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    background-color: gray;
+    border: 1px solid white;
 }
